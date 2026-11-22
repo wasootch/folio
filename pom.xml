@@ -18,6 +18,12 @@
   </properties>
 
   <dependencies>
+    <!-- Modern flat look and feel (dark theme). -->
+    <dependency>
+      <groupId>com.formdev</groupId>
+      <artifactId>flatlaf</artifactId>
+      <version>3.6.1</version>
+    </dependency>
     <!-- Used only for the native Windows folder dialog (IFileOpenDialog). -->
     <dependency>
       <groupId>net.java.dev.jna</groupId>

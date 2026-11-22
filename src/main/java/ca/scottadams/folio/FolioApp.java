@@ -2,9 +2,9 @@ package ca.scottadams.folio;
 
 import ca.scottadams.folio.logging.AppLogging;
 import ca.scottadams.folio.ui.MainWindow;
+import ca.scottadams.folio.ui.Theme;
 
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,9 +27,9 @@ public final class FolioApp {
         log.log(Level.INFO, "Folio starting; log file at {0}", logFile);
 
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            log.log(Level.WARNING, "Could not set system look and feel; using default.", e);
+            Theme.install();
+        } catch (RuntimeException e) {
+            log.log(Level.WARNING, "Could not install the theme; using the default look and feel.", e);
         }
 
         SwingUtilities.invokeLater(() -> new MainWindow(options).setVisible(true));
