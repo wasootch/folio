@@ -85,7 +85,7 @@ public final class MainWindow extends JFrame {
     private final JLabel statusLabel = new JLabel("Choose a location to begin.");
     private final JButton upButton = new JButton("↑ Up");
     private final JButton browseButton = new JButton("Browse…");
-    private final JButton renameButton = new JButton("Rename");
+    private final JButton renameButton = Theme.accentText(new JButton("Rename"));
 
     private Location currentLocation = Location.HOME;
     /** Bumped on every navigation so results from a superseded load are ignored. */
@@ -132,6 +132,7 @@ public final class MainWindow extends JFrame {
         });
         setSize(1250, 760);
         setLocationRelativeTo(null);
+        SwingUtilities.invokeLater(table::requestFocusInWindow);
         if (options.startPath() != null && !options.startPath().isBlank()) {
             LOG.info(() -> "Starting at " + options.startPath());
             navigateToTypedPath(options.startPath());
@@ -322,6 +323,7 @@ public final class MainWindow extends JFrame {
             }
         });
         table.getColumnModel().getColumn(0).setCellRenderer(new NameCellRenderer());
+        table.getColumnModel().getColumn(5).setCellRenderer(new NamingCellRenderer());
         int[] widths = {300, 220, 160, 140, 40, 300};
         for (int i = 0; i < widths.length; i++) {
             table.getColumnModel().getColumn(i).setPreferredWidth(widths[i]);
@@ -763,6 +765,34 @@ public final class MainWindow extends JFrame {
         menu.show(table, e.getX(), e.getY());
     }
 
+    /** Colours the file name and the proposed name green when the file already follows the pattern, amber if not. */
+    private void colorByNaming(javax.swing.JLabel label, JTable t, boolean selected, int viewRow) {
+        BookRow book = tableModel.getRows().get(t.convertRowIndexToModel(viewRow));
+        if (book.isLocation() || book.metadata == null || book.newBaseName == null) {
+            // The renderer is shared between rows and remembers its colour, so put the default back.
+            if (!selected) {
+                label.setForeground(t.getForeground());
+            }
+            label.setToolTipText(null);
+            return;
+        }
+        boolean matches = book.matchesNaming();
+        label.setForeground(matches ? Theme.MATCH : Theme.MISMATCH);
+        label.setToolTipText(matches ? "Already named according to the rename pattern"
+                : "Would be renamed to: " + book.newBaseName + book.extension());
+    }
+
+    /** The "New Name" column, coloured like the file name. */
+    private final class NamingCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable t, Object value, boolean selected,
+                                                       boolean focus, int row, int column) {
+            super.getTableCellRendererComponent(t, value, selected, focus, row, column);
+            colorByNaming(this, t, selected, row);
+            return this;
+        }
+    }
+
     /** Draws a folder/drive/computer icon beside location rows. */
     private final class NameCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
         @Override
@@ -771,6 +801,7 @@ public final class MainWindow extends JFrame {
             super.getTableCellRendererComponent(t, value, selected, focus, row, column);
             setIcon(value instanceof BookTableModel.Cell cell && cell.location() != null
                     ? iconFor(cell.location()) : null);
+            colorByNaming(this, t, selected, row);
             return this;
         }
 

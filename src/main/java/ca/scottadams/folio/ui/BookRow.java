@@ -84,6 +84,12 @@ final class BookRow {
         this.rawMetadata = null;
     }
 
+    /** True when the file is already named exactly as the current rename pattern would name it. */
+    boolean matchesNaming() {
+        return file != null && newBaseName != null
+                && file.getFileName().toString().equals(newBaseName + extension());
+    }
+
     String extension() {
         String name = file.getFileName().toString();
         int dot = name.lastIndexOf('.');

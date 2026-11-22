@@ -74,7 +74,7 @@ final class DetailsPanel extends JPanel {
     private final JTextArea rawArea = readOnlyArea(10);
 
     private final JButton revertButton = new JButton("Revert");
-    private final JButton saveButton = new JButton("Save to EPUB");
+    private final JButton saveButton = Theme.primary(new JButton("Save to EPUB"));
 
     // Multi-edit form: only the fields that make sense across books.
     private final Map<BulkEdit, Object> multiInitial = new EnumMap<>(BulkEdit.class);
@@ -319,7 +319,7 @@ final class DetailsPanel extends JPanel {
                 indexField.setForeground(UIManager.getColor("TextField.foreground"));
             } catch (NumberFormatException e) {
                 // Keep the last valid number and flag the field until it parses.
-                indexField.setForeground(Color.RED);
+                indexField.setForeground(Theme.DANGER);
             }
         }
 
