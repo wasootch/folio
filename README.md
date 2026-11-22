@@ -4,9 +4,10 @@ A small desktop app for browsing a folder of EPUB files, viewing their
 metadata, and bulk-renaming them from a template built out of author, series,
 and title information.
 
-Built with plain Java (Swing + the JDK's built-in zip/XML support). The only
-dependency is JNA, used for the native Windows folder dialog; `mvn package`
-bundles it into `target/folio.jar`.
+Built with plain Java (Swing + the JDK's built-in zip/XML support). The two
+dependencies are FlatLaf, for the dark neon-accent look (colours live in
+`ui/Theme.java`), and JNA, used for the native Windows folder dialog;
+`mvn package` bundles both into `target/folio.jar`.
 
 ## Requirements
 
