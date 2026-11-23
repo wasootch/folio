@@ -1,5 +1,9 @@
 # Folio
 
+[![Build](https://github.com/wasootch/folio/actions/workflows/build.yml/badge.svg)](https://github.com/wasootch/folio/actions/workflows/build.yml)
+
+![Folio showing a folder of EPUBs, green where the file name already matches the rename pattern and amber where it would be renamed](docs/screenshot.png)
+
 A small desktop app for browsing a folder of EPUB files, viewing their
 metadata, and bulk-renaming them from a template built out of author, series,
 and title information.
@@ -159,3 +163,8 @@ src/main/java/ca/scottadams/folio/
   logging/AppLogging.java    java.util.logging configuration (console + file)
   ui/                        Swing main window, table model, log panel
 ```
+
+## License
+
+Folio is released under the [MIT License](LICENSE). It bundles FlatLaf and JNA, which keep their own
+licences; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
