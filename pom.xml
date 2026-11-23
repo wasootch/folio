@@ -5,11 +5,26 @@
 
   <groupId>ca.scottadams</groupId>
   <artifactId>folio</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Folio</name>
   <description>Browse EPUB files, inspect their metadata, and rename them from author/series/title templates.</description>
+  <url>https://github.com/wasootch/folio</url>
+  <inceptionYear>2026</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/wasootch/folio</url>
+    <connection>scm:git:https://github.com/wasootch/folio.git</connection>
+  </scm>
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
