@@ -50,7 +50,7 @@ public record AppOptions(boolean debug, String startPath, boolean help) {
                     String rest = value.substring(quote + 1).trim();
                     value = value.substring(0, quote);
                     if (!rest.isEmpty()) {
-                        String[] tokens = rest.split("\s+");
+                        String[] tokens = rest.split("\\s+");
                         for (int i = tokens.length - 1; i >= 0; i--) {
                             queue.addFirst(tokens[i]);
                         }

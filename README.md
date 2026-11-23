@@ -118,6 +118,12 @@ mvn exec:java
    file with the target name already
    exists, so nothing is ever silently overwritten.
 
+## Tests
+
+`mvn test` runs the JUnit 5 suite: EPUB reading and writing (including zip integrity, the
+`.bak` backup and failure handling), the rename template, command-line parsing, and the row
+state logic. Test EPUBs are generated in code, so no fixtures are checked in.
+
 ## Command line
 
 ```
