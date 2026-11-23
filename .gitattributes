@@ -1,0 +1,9 @@
+# Normalise line endings: text files are LF in the repository and in working copies.
+* text=auto eol=lf
+
+# Never touch binary files.
+*.epub binary
+*.jar binary
+*.png binary
+*.jpg binary
+*.bak binary
