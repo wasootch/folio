@@ -7,6 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BulkEditTest {
@@ -34,7 +35,7 @@ class BulkEditTest {
     @Test
     void withCanReplaceAuthorsAndClearValues() {
         assertEquals(List.of("Zed"), BulkEdit.AUTHORS.with(BOOK, List.of("Zed")).authors());
-        assertEquals(null, BulkEdit.PUBLISHER.with(BOOK, null).publisher());
+        assertNull(BulkEdit.PUBLISHER.with(BOOK, null).publisher());
         assertEquals("Title", BulkEdit.PUBLISHER.with(BOOK, null).title(), "title is never touched by a bulk edit");
         assertEquals(3.0, BulkEdit.SERIES.with(BOOK, null).seriesIndex(), "each book keeps its own number");
     }

@@ -3,6 +3,7 @@ package ca.scottadams.folio.rename;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FilenameSanitizerTest {
@@ -36,7 +37,7 @@ class FilenameSanitizerTest {
         String name = FilenameSanitizer.sanitize(("word ").repeat(100));
 
         assertTrue(name.length() <= 180, "length " + name.length());
-        assertTrue(!name.endsWith(" "));
+        assertFalse(name.endsWith(" "));
     }
 
     @Test
